@@ -400,14 +400,14 @@ public class LockstepController : MonoBehaviourPun
             if(action is CreateUnit)
             {
                 Debug.LogError("--Remote CreateUnit--");
-                var localAction = _actionDictionary[action.LockstepTurnID];
-                int i = 0;
+                //var localAction = _actionDictionary[action.LockstepTurnID];
+                //int i = 0;
                 foreach (UnitData data in action.GameState)
                 {
-                    if(localAction.GameState[0].Xpos != data.Xpos)
-                    {
-                        Debug.LogError("FAILED ERROR DUN FOR");
-                    }
+                    //if(localAction.GameState[0].Xpos != data.Xpos)
+                    //{
+                    //    Debug.LogError("FAILED ERROR DUN FOR");
+                    //}
                     Debug.LogError("- lockstep turn: " + action.LockstepTurnID);
 
                     Debug.LogError("remote UUID: " + data.Uuid);
