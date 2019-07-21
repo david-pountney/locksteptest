@@ -273,7 +273,7 @@ public class LockstepController : MonoBehaviourPun
             }
 
             _gameFrame++;
-            if (_gameFrame == _gameFramesPerLockstepTurn)
+            if (_gameFrame >= _gameFramesPerLockstepTurn)
             {
                 print("_gameFramesPerLockstepTurn: " + _gameFramesPerLockstepTurn);
                 _gameFrame = 0;
