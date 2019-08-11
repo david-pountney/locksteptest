@@ -1,11 +1,31 @@
 ﻿using Photon.Pun;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using TN_InterviewTest;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] private LockstepController _lockstepController; 
+    [SerializeField] private LockstepController _lockstepController;
+    [SerializeField] private TN_CameraControlBehaviour _cameraControl;
+
+    private void OnEnable()
+    {
+        _lockstepController.OnPlayerJoined += OnPlayerJoined;
+    }
+
+    private void OnPlayerJoined(int playerID)
+    {
+        if(playerID == 1)
+        {
+
+        }
+        if (playerID == 2)
+        {
+
+        }
+    }
 
     private void Update()
     {

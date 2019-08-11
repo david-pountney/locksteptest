@@ -62,11 +62,14 @@ public class LockstepController : MonoBehaviourPun
 
     private bool _imSync = true;
 
+    private int _randomSeed = 7;
+
+    public System.Action<int> OnPlayerJoined;
+
     private void Awake()
     {
         Screen.sleepTimeout = SleepTimeout.NeverSleep;
-        Random.InitState(7);
-        //Screen.SetResolution(1080, 540, true);
+        Random.InitState(_randomSeed);
     }
 
     private void OnEnable()
@@ -101,7 +104,9 @@ public class LockstepController : MonoBehaviourPun
         _runtimeAverage = new RollingAverage(_numberOfPlayers, _initialGameFrameTurnLength);
 
         InitGameStartLists();
-        
+
+        OnPlayerJoined?.Invoke(PhotonNetwork.LocalPlayer.ActorNumber);
+
         this.photonView.RPC("PlayerReadyToStart", RpcTarget.AllBuffered, PhotonNetwork.LocalPlayer.ActorNumber.ToString());
     }
 
@@ -218,6 +223,8 @@ public class LockstepController : MonoBehaviourPun
 
     private void GameStart()
     {
+        
+
         //start the LockStep Turn loop
         _gameStarted = true;
     }

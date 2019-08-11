@@ -12,9 +12,12 @@ public class NetworkHandler : MonoBehaviourPunCallbacks
     {
         Debug.Log("OnConnectedToMaster() was called by PUN.");
 
-        RoomOptions roomOptions = new RoomOptions();
-        roomOptions.IsVisible = false;
-        roomOptions.MaxPlayers = 4;
+        RoomOptions roomOptions = new RoomOptions
+        {
+            IsVisible = false,
+            MaxPlayers = 4
+        };
+
         PhotonNetwork.JoinOrCreateRoom("The room", roomOptions, TypedLobby.Default);
     }
 
