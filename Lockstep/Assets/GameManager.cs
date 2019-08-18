@@ -8,7 +8,9 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private LockstepController _lockstepController;
-    [SerializeField] private TN_CameraControlBehaviour _cameraControl;
+
+    [SerializeField] private GameObject _player1Camera, _player2Camera;
+
 
     private void OnEnable()
     {
@@ -17,13 +19,17 @@ public class GameManager : MonoBehaviour
 
     private void OnPlayerJoined(int playerID)
     {
+        Camera.main.gameObject.SetActive(false);
+
         if(playerID == 1)
         {
-
+            _player1Camera.SetActive(true);
+            _player2Camera.SetActive(false);
         }
-        if (playerID == 2)
+        else if (playerID == 2)
         {
-
+            _player2Camera.SetActive(true);
+            _player1Camera.SetActive(false);
         }
     }
 
@@ -39,7 +45,7 @@ public class GameManager : MonoBehaviour
 
             //var speed = Random.Range(4, 6);
             var speed = 5;
-            var direction = Random.Range(0, 359);
+            var direction = UnityEngine.Random.Range(0, 359);
             //var direction = 45;
 
             var action = new CreateUnit(PhotonNetwork.LocalPlayer.ActorNumber,
