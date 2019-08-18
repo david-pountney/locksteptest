@@ -348,17 +348,18 @@ public class LockstepController : MonoBehaviourPun
         }
 
         action.GameState = ObjectPool.Instance.GetGameState();
-
-        Debug.LogError("--Local CreateUnit--");
+       
 
         foreach (UnitData data in action.GameState)
         {
+            /*
             Debug.LogError("UUID: " + data.Uuid);
 
             Debug.LogError("- lockstep turn: " + action.LockstepTurnID);
 
             Debug.LogError("Local ation x position: " + data.Xpos);
             Debug.LogError("Local ation z position: " + data.Zpos);
+            */
         }
 
         action.Hash = ObjectPool.Instance.BuildHash(action.GameState);
@@ -600,9 +601,12 @@ public class LockstepController : MonoBehaviourPun
         //_lockstepTurnLength = 200;
         _gameFrameTurnLength = _runtimeAverage.GetMax();
         //_gameFrameTurnLength = 50;
+        
+        Debug.LogError("_gameFrameTurnLength: " + _gameFrameTurnLength);
+        Debug.LogError("_lockstepTurnLength: " + _lockstepTurnLength);
 
-        if (_gameFrameTurnLength <= 10)
-            _gameFrameTurnLength = 10;
+        //if (_gameFrameTurnLength <= 10)
+        //    _gameFrameTurnLength = 10;
 
         //lockstep turn has to be at least as long as one game frame
         if (_gameFrameTurnLength > _lockstepTurnLength)
@@ -631,6 +635,6 @@ public class LockstepController : MonoBehaviourPun
         if (_lockstepsPerSecond == 0) { _lockstepsPerSecond = 1; } //minimum per second
 
         _gameFramesPerSecond = _lockstepsPerSecond * _gameFramesPerLockstepTurn;
-        _uiDebug.SetGameFramesPerSecondText(_gameFramesPerSecond);
+        _uiDebug.SetGameFramesPerSecondText(_lockstepTurnLength);
     }
 }

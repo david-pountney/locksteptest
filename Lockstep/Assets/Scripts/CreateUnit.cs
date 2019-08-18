@@ -17,7 +17,6 @@ public class CreateUnit : Action
     public CreateUnit(int owningPlayer, int lockstepTurnID, string actionName, string uuid, int xpos, int zpos, int speed, int direction) : base(owningPlayer, lockstepTurnID, actionName)
     {
         Uuid = uuid;
-        Debug.LogError("UUID HAS BEEN SET TO: " + uuid);
         Xpos = xpos;
         Zpos = zpos;
         Speed = speed;
@@ -32,15 +31,12 @@ public class CreateUnit : Action
 
     public override void ProcessAction()
     {
-        Debug.LogError("PRocss Action for createunit lockstep turn: " + LockstepTurnID );
         //if (ObjectPool.Instance.GetGameState().Length > 25) return;
 
         GameObject b = ObjectPool.Instance.GetBuilding(OwningPlayer);
 
         var move = b.GetComponent<Unit>();
         var data = move.UnitData;
-
-        Debug.LogError("UUID IS STILL SET TO: " + Uuid);
 
         data.Uuid = Uuid;
 

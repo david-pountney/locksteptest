@@ -38,27 +38,36 @@ public class GameManager : MonoBehaviour
         //if (Input.GetKeyUp(KeyCode.A))
         if (Input.GetMouseButtonUp(0))
         {
-            //var xpos = Random.Range(-100, 100);
-            var xpos = 50;
-            //var zpos = Random.Range(-100, 100);
-            var zpos = 50;
+            RaycastHit hit;
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out hit, 10000.0f, LayerMask.GetMask("Ground")))
+            { 
+                Debug.Log("You selected the " + hit.transform.name); // ensure you picked right object
+                var hitPosition = hit.point; 
 
-            //var speed = Random.Range(4, 6);
-            var speed = 5;
-            var direction = UnityEngine.Random.Range(0, 359);
-            //var direction = 45;
+                //var xpos = Random.Range(-100, 100);
+                var xpos = (int)hitPosition.x;
+                //var zpos = Random.Range(-100, 100);
+                var zpos = (int)hitPosition.z;
 
-            var action = new CreateUnit(PhotonNetwork.LocalPlayer.ActorNumber,
-                                        _lockstepController.LockStepTurnID,
-                                        "CreateUnit",
-                                        System.Guid.NewGuid().ToString(),
-                                        xpos,
-                                        zpos,
-                                        speed,
-                                        direction
-                                        );
+                //var speed = Random.Range(4, 6);
+                var speed = 5;
+                var direction = UnityEngine.Random.Range(0, 359);
+                //var direction = 45;
 
-            _lockstepController.CreateAction(action);
+                var action = new CreateUnit(PhotonNetwork.LocalPlayer.ActorNumber,
+                                            _lockstepController.LockStepTurnID,
+                                            "CreateUnit",
+                                            System.Guid.NewGuid().ToString(),
+                                            xpos,
+                                            zpos,
+                                            speed,
+                                            direction
+                                            );
+
+                _lockstepController.CreateAction(action);
+            }
+
         }
     }
 }

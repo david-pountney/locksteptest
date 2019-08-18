@@ -60,6 +60,11 @@ namespace TN_InterviewTest
             _mainCamera.depthTextureMode = DepthTextureMode.Depth;
         }
 
+        public void SetCameraPosition()
+        {
+
+        }
+
         private void OnEnable()
         {
             _currentRotation = this.transform.localEulerAngles.y;
