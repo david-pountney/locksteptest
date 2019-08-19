@@ -374,6 +374,8 @@ public class LockstepController : MonoBehaviourPun
         }
         action.RuntimeAverage = Convert.ToInt32(_currentGameFrameRuntime);
 
+        Debug.LogError("Network time: " + action.NetworkAverage + "ms");
+
         //clear the current runtime average
         _currentGameFrameRuntime = 0;
 

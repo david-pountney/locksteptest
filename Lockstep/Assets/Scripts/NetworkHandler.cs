@@ -18,6 +18,7 @@ public class NetworkHandler : MonoBehaviourPunCallbacks
             MaxPlayers = 4
         };
 
+        PhotonNetwork.ConnectToRegion("eu");
         PhotonNetwork.JoinOrCreateRoom("The room", roomOptions, TypedLobby.Default);
     }
 
